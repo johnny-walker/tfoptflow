@@ -1,0 +1,62 @@
+Building model...
+build nn
+Building feature pyramids (c11,c21) ... (c16,c26)
+Adding corr6 with inputs pwcnet/featpyr/c16 and pwcnet/featpyr/c26
+Adding flow6 with input pwcnet/corr/corr6
+Adding refined_flow6 sum of dc_convs_chain(pwcnet/predict_flow/upfeat6) with pwcnet/predict_flow/flow6/BiasAdd
+Adding up_flow6 with input pwcnet/ctxt/refined_flow6
+Adding up_feat6 with input pwcnet/predict_flow/upfeat6
+Adding warp5 with inputs pwcnet/featpyr/c25 and pwcnet/mul
+Adding corr5 with inputs pwcnet/featpyr/c15 and pwcnet/warp/warp5/Reshape_1
+Adding flow5 with inputs pwcnet/corr_1/corr5, pwcnet/featpyr/c15, pwcnet/upsample/up_flow6/BiasAdd, pwcnet/upsample_1/up_feat6/BiasAdd
+Adding refined_flow5 sum of dc_convs_chain(pwcnet/predict_flow_1/upfeat5) with pwcnet/predict_flow_1/flow5/BiasAdd
+Adding up_flow5 with input pwcnet/ctxt_1/refined_flow5
+Adding up_feat5 with input pwcnet/predict_flow_1/upfeat5
+Adding warp4 with inputs pwcnet/featpyr/c24 and pwcnet/mul_1
+Adding corr4 with inputs pwcnet/featpyr/c14 and pwcnet/warp_1/warp4/Reshape_1
+Adding flow4 with inputs pwcnet/corr_2/corr4, pwcnet/featpyr/c14, pwcnet/upsample_2/up_flow5/BiasAdd, pwcnet/upsample_3/up_feat5/BiasAdd
+Adding refined_flow4 sum of dc_convs_chain(pwcnet/predict_flow_2/upfeat4) with pwcnet/predict_flow_2/flow4/BiasAdd
+Adding up_flow4 with input pwcnet/ctxt_2/refined_flow4
+Adding up_feat4 with input pwcnet/predict_flow_2/upfeat4
+Adding warp3 with inputs pwcnet/featpyr/c23 and pwcnet/mul_2
+Adding corr3 with inputs pwcnet/featpyr/c13 and pwcnet/warp_2/warp3/Reshape_1
+Adding flow3 with inputs pwcnet/corr_3/corr3, pwcnet/featpyr/c13, pwcnet/upsample_4/up_flow4/BiasAdd, pwcnet/upsample_5/up_feat4/BiasAdd
+Adding refined_flow3 sum of dc_convs_chain(pwcnet/predict_flow_3/upfeat3) with pwcnet/predict_flow_3/flow3/BiasAdd
+Adding up_flow3 with input pwcnet/ctxt_3/refined_flow3
+Adding up_feat3 with input pwcnet/predict_flow_3/upfeat3
+Adding warp2 with inputs pwcnet/featpyr/c22 and pwcnet/mul_3
+Adding corr2 with inputs pwcnet/featpyr/c12 and pwcnet/warp_3/warp2/Reshape_1
+Adding flow2 with inputs pwcnet/corr_4/corr2, pwcnet/featpyr/c12, pwcnet/upsample_6/up_flow3/BiasAdd, pwcnet/upsample_7/up_feat3/BiasAdd
+Adding refined_flow2 sum of dc_convs_chain(pwcnet/predict_flow_4/upfeat2) with pwcnet/predict_flow_4/flow2/BiasAdd
+Upsampling pwcnet/ctxt_4/refined_flow2 by 4 in each dimension.
+... model built.
+Loading model checkpoint ./models//pwcnet-lg-6-2-multisteps-chairsthingsmix/pwcnet.ckpt-595000 for eval or testing...
+
+... model loaded
+
+Model Configuration:
+  verbose                True
+  ckpt_path              ./models//pwcnet-lg-6-2-multisteps-chairsthingsmix/pwcnet.ckpt-595000
+  x_dtype                <dtype: 'float32'>
+  x_shape                [2, None, None, 3]
+  y_dtype                <dtype: 'float32'>
+  y_shape                [None, None, 2]
+  gpu_devices            ['/device:GPU:0']
+  controller             /device:GPU:0
+  batch_size             1
+  use_tf_data            True
+  use_mixed_precision    False
+  pyr_lvls               6
+  flow_pred_lvl          2
+  search_range           4
+  use_dense_cx           True
+  use_res_cx             True
+  adapt_info             (1, 436, 1024, 2)
+  mode                   test
+  trainable params       14079050
+3.2074480056762695
+1.6964874267578125
+1.7069520950317383
+1.9643268585205078
+1.5905756950378418
+1.5069572925567627
