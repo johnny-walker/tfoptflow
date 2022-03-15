@@ -38,6 +38,9 @@ def adapt_x(x, pyr_lvls=6):
         x_adapt_info = x_adapt.shape  # Save original shape
         x_adapt = np.pad(x_adapt, padding, mode='constant', constant_values=0.)
 
+    x_adapt = np.concatenate([x_adapt[:, 0], x_adapt[:, 1]], -1)
+    print('x_adapt.shape:', x_adapt.shape)
+
     return x_adapt, x_adapt_info
 
 def postproc_y_hat(pred_flows, adapt_info=None):

@@ -19,7 +19,7 @@ def load_to_IE(model_xml, pair):
     # padding for 64 alignment
     print('frame.shape:', x.shape)
     x_adapt, _ = sample_utils.adapt_x(x)
-    x_adapt = x_adapt.transpose((0, 4, 1, 2, 3))    # B2HWC --> BC2HW
+    x_adapt = x_adapt.transpose((0, 3, 1, 2))    # B2HWC --> BC2HW
     print('adapt.shape:', x_adapt.shape)
     print(f"Input shape: {net.input_info['x_tnsr'].tensor_desc.dims}")
 
@@ -76,7 +76,7 @@ def inference(args):
         y_adapt_info = None
         if x_adapt_info is not None:
             y_adapt_info = (x_adapt_info[0], x_adapt_info[2], x_adapt_info[3], 2)
-        input_image = x_adapt.transpose((0, 4, 1, 2, 3))    # B2HWC --> BC2HW
+        input_image = x_adapt.transpose((0, 3, 1, 2))    # BHWC --> BCHW
             
         # inference
         start = time.time()
@@ -102,8 +102,8 @@ def get_args():
     model_desc = "location of the model XML file"
     input_desc = "location of the image input"
 
-    parser.add_argument("--model", default='../model_ir_768x1280/pwc_frozen.xml', help=model_desc)
-    parser.add_argument("--input", default='D:/data/tennis', help=input_desc)
+    parser.add_argument("--model", default='../model_ir/frozen.xml', help=model_desc)
+    parser.add_argument("--input", default='./samples', help=input_desc)
 
     args = parser.parse_args()
     return args
