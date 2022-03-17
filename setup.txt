@@ -1,0 +1,16 @@
+conda create --name tf1 python=3.6.13
+conda activate tf1
+pip install tensorflow=1.15
+pip install scikit-image
+pip install pandas
+pip install opencv-python
+pip install tqdm
+pip install openvino-python
+run test.py
+
+to run openvino-python:
+cd \Program Files (x86)\Intel\openvino_2021\bin
+C:\Program Files (x86)\Intel\openvino_2021\bin>setupvars.bat
+Python 3.6.8
+[setupvars.bat] OpenVINO environment initialized
+run inference.py

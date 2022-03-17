@@ -26,6 +26,7 @@ from multi_gpus import assign_to_device, average_gradients
 from core_warp import dense_image_warp
 from core_costvol import cost_volume
 from utils import tf_where
+print(tf.__version__)
 
 _DEBUG_USE_REF_IMPL = False
 

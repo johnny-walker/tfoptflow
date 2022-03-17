@@ -11,10 +11,13 @@ from visualize import flow_to_img
 import sample_utils
 
 def load_to_IE(model_xml, pair):
+    print('read_network')
     model_bin = os.path.splitext(model_xml)[0] + ".bin"
     ie = IECore()
     net = ie.read_network(model=model_xml, weights=model_bin)
     
+    # do reshape
+    '''
     x = np.array([pair])
     # padding for 64 alignment
     print('frame.shape:', x.shape)
@@ -23,10 +26,9 @@ def load_to_IE(model_xml, pair):
     print('adapt.shape:', x_adapt.shape)
     print(f"Input shape: {net.input_info['x_tnsr'].tensor_desc.dims}")
 
-    # Call reshape
     net.reshape({'x_tnsr': x_adapt.shape})
     print(f"Input shape (new): {net.input_info['x_tnsr'].tensor_desc.dims}")
-
+    '''
     exec_net = ie.load_network(network=net, device_name="CPU")
     print("IR successfully loaded into Inference Engine.")
     del net
@@ -62,8 +64,10 @@ def inference(args):
     Performs inference on an input image, given an ExecutableNetwork
     '''
     img_pairs = load_images(args)
+    start = time.time()
     exec_net = load_to_IE(args.model, img_pairs[0])
-
+    print(time.time()-start)
+    
     idx = 0
     for pair in img_pairs:
         # Repackage input image pairs as np.ndarray
